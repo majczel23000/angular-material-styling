@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Direction } from '@angular/cdk/bidi';
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
@@ -17,6 +18,8 @@ export class SidenavComponent implements OnInit {
 
   public isScreenSmall: boolean | undefined;
   users: Observable<User[]>;
+  isDarkTheme: boolean = false;
+  dir: Direction = 'ltr';
   @ViewChild(MatSidenav) sidenav: MatSidenav;
 
   constructor(
@@ -41,6 +44,14 @@ export class SidenavComponent implements OnInit {
         this.sidenav.close();
       }
     })
+  }
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
+
+  toggleDir(): void {
+    this.dir = this.dir == 'ltr' ? 'rtl' : 'ltr';
   }
 
 }
